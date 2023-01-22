@@ -1,5 +1,6 @@
 
 
+
 var addBtn = document.querySelector("#add")
 var inputs = document.querySelectorAll('input')
 var listExpenses = document.querySelector('#allList')
@@ -30,7 +31,7 @@ function addTask(){
         "description" : description.value,
         "category" : category.value
     }
-    axios.post('https://crudcrud.com/api/e0a98c38c01f4df9b00fcb87e344545b/app',{data : expense})
+    axios.post('https://crudcrud.com/api/5bbf233e1fe74d8a8357c4183f9406c8/expenses',{data : expense})
     .then(res=>{
         console.log(res)
         update()
@@ -43,7 +44,7 @@ function update(){
     //     return
     // }
     strg = ""
-    axios.get("https://crudcrud.com/api/e0a98c38c01f4df9b00fcb87e344545b/app")
+    axios.get("https://crudcrud.com/api/5bbf233e1fe74d8a8357c4183f9406c8/expenses")
     .then(res=>{
         arr = res.data
         arr.forEach((element,index) => {
@@ -60,18 +61,43 @@ function update(){
 
 }
 function deleted(index){
-    strArray = localStorage.getItem('expenses')
-    jsonArray = JSON.parse(strArray)
-    jsonArray.splice(index, 1)
-    localStorage.setItem('expenses',JSON.stringify(jsonArray))
-    update()
+    // strArray = localStorage.getItem('expenses')
+    // jsonArray = JSON.parse(strArray)
+    // jsonArray.splice(index, 1)
+    // localStorage.setItem('expenses',JSON.stringify(jsonArray))
+    // update()
+    axios.get("https://crudcrud.com/api/5bbf233e1fe74d8a8357c4183f9406c8/expenses")
+    .then(res=>{
+        element = res.data[index]
+     
+        axios.delete("https://crudcrud.com/api/5bbf233e1fe74d8a8357c4183f9406c8/expenses/"+element._id)
+        .then(()=>{ 
+            update()
+    })
+        .catch((err)=>{console.log(err)})
+    })
+    .catch(err=>{console.log(err)})
 }
 function edit(index){
-    strArray = localStorage.getItem('expenses')
-    jsonArray = JSON.parse(strArray)
-    element = jsonArray[index]
-    amount.value = element[0]
-    description.value = element[1]
-    category.value = element[2]
-    deleted(index)
+    // strArray = localStorage.getItem('expenses')
+    // jsonArray = JSON.parse(strArray)
+    // element = jsonArray[index]
+    // amount.value = element[0]
+    // description.value = element[1]
+    // category.value = element[2]
+    // deleted(index)
+
+    axios.get("https://crudcrud.com/api/5bbf233e1fe74d8a8357c4183f9406c8/expenses")
+    .then(res=>{
+        element = res.data[index]
+        amount.value = element.data.amount
+        description.value = element.data.description
+        category.value = element.data.category
+        axios.delete("https://crudcrud.com/api/5bbf233e1fe74d8a8357c4183f9406c8/expenses/"+element._id)
+        .then(()=>{ 
+            update()
+    })
+        .catch((err)=>{console.log(err)})
+    })
+    .catch(err=>{console.log(err)})
 }
