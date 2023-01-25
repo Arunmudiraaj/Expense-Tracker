@@ -10,8 +10,8 @@
 <body>
     <div class="container flex flex-col w-full items-center mx-auto">
     <div class="bg-black text-white m-2 px-4 py-1 text-lg md:text-xl text-center font-bold w-full">Expense Tracker💵</div>
-    <div class="inputs p-1 mx-auto flex bg-black gap-1 flex-col md:flex md:flex-row md:justify-around items-center justify-between w-full">
-        <form action="">
+    <form id="form" class="inputs p-1 mx-auto flex bg-black gap-1 flex-col md:flex md:flex-row md:justify-around items-center justify-between w-full">
+       
         <input class="p-1 m-1 text-center w-4/5 md:w-2/6 lg:w-1/4 border-black border rounded-md" placeholder="Amount" type="number">
         <input class="p-1 m-1 text-center w-4/5 md:w-2/6 lg:w-1/4 border-black border rounded-md" placeholder="Description" type="text">
         <select id="category" class="p-1 m-1 w-4/5 md:w-2/6 lg:w-1/4 border-black border-1 text-center rounded-md">
@@ -22,9 +22,9 @@
             <option value="clothing">clothing</option>
             <option value="others">Others</option>
         </select>
-        <button id="add" type="submit" class="bg-green-500 lg:w-1/12 text-black text-xl font-bold px-3 text-center m-1 border-yellow-200 border rounded-md">Add</button>
+        <button id="add" type="submit" class="bg-green-500 lg:w-1/12 text-black text-xl font-bold px-4 text-center m-1 border-yellow-200 border rounded-md">Add</button>
+    
     </form>
-    </div>
     <p class="mx-auto mt-4">--Your List--</p>
     <ul id="allList" class="p-1 items-center gap-2 my-3 mx-auto flex flex-col">
         <!-- your all list -->
